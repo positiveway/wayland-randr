@@ -1,0 +1,11 @@
+[package]
+name = "wayland-randr"
+edition = "2021"
+version = "0.2.1"
+
+
+[dependencies]
+dbus = "0.9"
+bitflags = "2.5"
+structopt = "0.3"
+pkg-config = "0.3"
