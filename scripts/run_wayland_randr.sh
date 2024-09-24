@@ -2,7 +2,9 @@
 
 set -e
 
-AppDestDir="$HOME/Documents/wayland-randr"
+DataDir="/mnt/data"
+DocsDir="$DataDir/Documents"
+ScriptsDir="$DocsDir/Scripts"
 
-$AppDestDir/wayland-randr adjust --brightness 0.25 eDP-1
+"$ScriptsDir/wayland-randr" adjust --brightness 0.25 eDP-1
 # ./target/release/wayland-randr adjust --brightness 0.3 eDP-1

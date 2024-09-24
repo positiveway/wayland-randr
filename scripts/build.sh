@@ -1,14 +1,13 @@
 #!/usr/bin/env bash
 
-RunAtLogin=false
-
-AppDestDir="$HOME/Documents/wayland-randr"
-LoginStartupDir="/etc/profile.d"
-
-RunScriptDir="$HOME/Desktop"
-RunAtLoginDir=$LoginStartupDir
-
 set -e
+
+SimpleCopy="cp -f"
+
+#DesktopDir="$HOME/Desktop"
+DataDir="/mnt/data"
+DocsDir="$DataDir/Documents"
+ScriptsDir="$DocsDir/Scripts"
 
 #Linker
 sudo apt install lld mold
@@ -18,16 +17,13 @@ sudo apt install pkg-config
 cd ..
 cargo build --release
 
-[ -d $AppDestDir ] || mkdir $AppDestDir
-cp ./target/release/wayland-randr $AppDestDir/wayland-randr
+# Copy to Scripts
+mkdir -p "$ScriptsDir"
+$SimpleCopy ./target/release/wayland-randr "$ScriptsDir"
 
-if $RunAtLogin
-then
-sudo cp ./scripts/run_at_login_wayland_randr.sh $RunAtLoginDir
-sudo chmod +x $RunAtLoginDir/run_at_login_wayland_randr.sh
-fi
+$SimpleCopy ./scripts/run_wayland_randr.sh "$ScriptsDir"
+chmod +x "$ScriptsDir/run_wayland_randr.sh"
 
-cp ./scripts/run_wayland_randr.sh $RunScriptDir
-sudo chmod +x $RunScriptDir/run_wayland_randr.sh
-
-$RunScriptDir/run_wayland_randr.sh
+# Copy to Desktop
+#$SimpleCopy ./scripts/run_wayland_randr.sh "$DesktopDir"
+#chmod +x "$DesktopDir/run_wayland_randr.sh"
