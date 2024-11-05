@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -e
-
 BuiltinDisplay="eDP-1"
 eGPUDisplay="eDP-1-1"
 
